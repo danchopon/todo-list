@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View, Text } from 'react-native';
-import TaskItem from './TaskItem';
+import { ListView } from 'react-native';
 import { tasksFetch } from '../actions';
+import TaskItem from './TaskItem';
 
 class TodoList extends Component {
 
@@ -25,25 +25,28 @@ class TodoList extends Component {
     this.dataSource = ds.cloneWithRows(tasks);
   }
 
-  renderRow(todo) {
-    return <TodoItem todo={todo} />;
+  renderRow(task) {
+    return <TaskItem task={task} />;
   }
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'cyan'}}>
-        <Text>dfsdf</Text>
-      </View>
+      <ListView
+        style={{flex: 1}}
+        enableEmptySections
+        dataSource={this.dataSource}
+        renderRow={this.renderRow}
+      />
     )
   }
 }
 
-// const mapStateToProps = state => {
-//   const todos = _.map(state.todos, (val, id) => {
-//     return { ...val, id };
-//   });
-//
-//   return { todos };
-// };
+const mapStateToProps = state => {
+  const tasks = _.map(state.tasks, (val, id) => {
+    return { ...val, id };
+  });
 
-export default connect(null, { tasksFetch })(TodoList);
+  return { tasks };
+};
+
+export default connect(mapStateToProps, { tasksFetch })(TodoList);
