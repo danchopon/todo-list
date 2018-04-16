@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, StyleSheet, CheckBox } from 'react-native';
 
-class TodoItem extends Component {
+class TaskItem extends Component {
   constructor() {
     super();
 
@@ -15,7 +15,7 @@ class TodoItem extends Component {
   }
 
   render() {
-    const { title } = this.props.todo;
+    const { title } = this.props.task;
 
     return (
       <TouchableOpacity onPress={() => this.checkBoxTest()} style={styles.todoView}>
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default TodoItem;
+export default TaskItem;
